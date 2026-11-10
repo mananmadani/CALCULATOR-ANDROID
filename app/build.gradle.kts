@@ -15,16 +15,18 @@ android {
         versionName = "1.0"
     }
     signingConfigs {
-        create("release") {
-            storeFile = file("release.jks")
-            storePassword = "calc-release-2026"
-            keyAlias = "calc"
-            keyPassword = "calc-release-2026"
+        if (System.getenv("KEYSTORE_PASSWORD") != null) {
+            create("release") {
+                storeFile = file("release.jks")
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
         }
     }
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
