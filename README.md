@@ -1,5 +1,23 @@
 # Calculator
 
+
+
+![Downloads](https://img.shields.io/github/downloads/mananmadani/CALCULATOR-ANDROID/total)
+
+ 
+
+![Release](https://img.shields.io/github/v/release/mananmadani/CALCULATOR-ANDROID)
+
+ 
+
+![License](https://img.shields.io/github/license/mananmadani/CALCULATOR-ANDROID)
+
+ 
+
+![Build](https://github.com/mananmadani/CALCULATOR-ANDROID/actions/workflows/build.yml/badge.svg)
+
+
+
 A fast, fully offline calculator for Android, built with Kotlin and Jetpack Compose. Design inspired by the Apple, Google and Samsung calculators.
 
 ## Features
@@ -12,20 +30,24 @@ A fast, fully offline calculator for Android, built with Kotlin and Jetpack Comp
 - Swipe the display to delete, long-press the result to copy
 - Material You dynamic colors, dark/light theme, TalkBack support, landscape layout
 
-## Install
-Download the latest APK from the [Releases](../../releases) page and open it on your phone (Android 8.0+). You may need to allow installs from your browser or file manager.
+## Download
+Get the latest APK from the [Releases](https://github.com/mananmadani/CALCULATOR-ANDROID/releases/latest) page.
+
+1. Download `app-release.apk`
+2. Open it on your phone (Android 8.0+)
+3. Allow "install from this source" if asked
 
 ## Build from source
 ```
 gradle assembleRelease
 ```
-Or push to GitHub: the workflow in `.github/workflows/build.yml` builds the APK automatically.
+Or push to GitHub: the workflow in `.github/workflows/build.yml` builds a signed APK automatically.
 
 ## Releasing a new version
-Create and push a tag such as `v1.0.0`. The workflow builds the APK and attaches it to a GitHub Release.
+Create a new release with a tag such as `v1.1.0`. The workflow builds the APK and attaches it to the release.
 
 ## Tech
-Kotlin · Jetpack Compose · Material 3 · BigDecimal expression parser · min SDK 26
+Kotlin · Jetpack Compose · Material 3 · BigDecimal expression parser · Min SDK 26
 
 ## License
 MIT. See [LICENSE](LICENSE).
