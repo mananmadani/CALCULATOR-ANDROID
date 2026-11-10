@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.Calculator" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#FFF6F6F8</item>
+    </style>
+</resources>
