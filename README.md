@@ -20,6 +20,9 @@
 
 A fast, fully offline calculator for Android, built with Kotlin and Jetpack Compose. Design inspired by the Apple, Google and Samsung calculators.
 
+## Screenshots
+<img src="screenshots.png" alt="Calculator screenshots">
+
 ## Features
 - 100% offline: the app requests **no permissions**, not even internet
 - Haptic feedback on every key, with distinct feedback for equals, errors and long-press
