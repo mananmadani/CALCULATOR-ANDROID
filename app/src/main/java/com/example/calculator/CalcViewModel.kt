@@ -55,7 +55,6 @@ class CalcViewModel(app: Application) : AndroidViewModel(app) {
                 else -> { expr = ""; evaluated = false; result = null }
             }
         }
-        if (k != "⌫" && expr.length >= 50) return false
         val last = expr.lastOrNull()
 
         return when {
@@ -63,7 +62,6 @@ class CalcViewModel(app: Application) : AndroidViewModel(app) {
             k in DIGITS -> {
                 val cur = expr.takeLastWhile { it.isDigit() || it == '.' }
                 when {
-                    cur.count { it.isDigit() } >= 15 -> false
                     cur == "0" && k == "0" -> false
                     cur == "0" -> { expr = expr.dropLast(1) + k; true }
                     else -> { expr += k; true }
@@ -105,8 +103,8 @@ class CalcViewModel(app: Application) : AndroidViewModel(app) {
         if (v == null) { result = "Error"; lastValue = null; return false }
         expr = clean
         result = Engine.format(v)
-        lastValue = v
-        history.add(0, HistoryItem(clean, Engine.plain(v)))
+        lastValue = v.value
+        history.add(0, HistoryItem(clean, Engine.plain(v.value)))
         while (history.size > 50) history.removeAt(history.lastIndex)
         prefs.edit().putString("history", history.joinToString("\n") { "${it.expr}\t${it.value}" }).apply()
         return true

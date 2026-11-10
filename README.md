@@ -26,7 +26,7 @@ A fast, fully offline calculator for Android, built with Kotlin and Jetpack Comp
 ## Features
 - 100% offline: the app requests **no permissions**, not even internet
 - Haptic feedback on every key, with distinct feedback for equals, errors and long-press
-- Exact decimal math (`0.1 + 0.2 = 0.3`)
+- Exact decimal math (`0.1 + 0.2 = 0.3`) with no limit on expression length, digits per number, or result size
 - Live result preview while typing
 - Parentheses, percent (`50 + 10% = 55`), implicit multiplication (`2(3+4)`)
 - Calculation history saved on the device

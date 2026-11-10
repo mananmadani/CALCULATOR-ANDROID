@@ -24,7 +24,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Backspace
 import androidx.compose.material.icons.outlined.History
@@ -145,8 +147,8 @@ fun CalculatorScreen(vm: CalcViewModel = viewModel()) {
     if (showHistory) HistorySheet(vm) { showHistory = false }
 }
 
-private fun exprSize(n: Int) = when { n <= 7 -> 68f; n <= 10 -> 56f; n <= 14 -> 46f; n <= 20 -> 38f; else -> 30f }
-private fun resultSize(n: Int) = when { n <= 8 -> 72f; n <= 11 -> 58f; n <= 15 -> 46f; else -> 36f }
+private fun exprSize(n: Int) = when { n <= 7 -> 68f; n <= 10 -> 56f; n <= 14 -> 46f; n <= 20 -> 38f; n <= 40 -> 30f; else -> 24f }
+private fun resultSize(n: Int) = when { n <= 8 -> 72f; n <= 11 -> 58f; n <= 15 -> 46f; n <= 25 -> 36f; n <= 40 -> 28f; else -> 22f }
 
 @Composable
 private fun Display(vm: CalcViewModel, view: View, modifier: Modifier, onHistory: () -> Unit) {
@@ -176,13 +178,15 @@ private fun Display(vm: CalcViewModel, view: View, modifier: Modifier, onHistory
         IconButton(onClick = onHistory) {
             Icon(Icons.Outlined.History, contentDescription = "History", tint = cs.onSurfaceVariant)
         }
-        Spacer(Modifier.weight(1f))
+        // Long expressions/results scroll instead of being cut off; short ones sit at the bottom.
+        Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.BottomEnd) {
+        Column(Modifier.verticalScroll(rememberScrollState(), reverseScrolling = true)) {
         Text(
             exprText,
             Modifier.fillMaxWidth(),
             color = if (done || vm.expr.isEmpty()) cs.onSurfaceVariant else cs.onSurface,
             fontSize = eSize.sp, lineHeight = (eSize * 1.1f).sp,
-            fontWeight = FontWeight.Light, textAlign = TextAlign.End, maxLines = 3,
+            fontWeight = FontWeight.Light, textAlign = TextAlign.End,
         )
         Text(
             resText.ifEmpty { " " },
@@ -198,8 +202,10 @@ private fun Display(vm: CalcViewModel, view: View, modifier: Modifier, onHistory
             ),
             color = when { vm.isError -> cs.error; done -> cs.onSurface; else -> cs.onSurfaceVariant },
             fontSize = rSize.sp, lineHeight = (rSize * 1.1f).sp,
-            fontWeight = FontWeight.Light, textAlign = TextAlign.End, maxLines = 1,
+            fontWeight = FontWeight.Light, textAlign = TextAlign.End,
         )
+        }
+        }
     }
 }
 
